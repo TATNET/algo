@@ -14,7 +14,7 @@ class GameSprite(sprite.Sprite):
  
         self.image = transform.scale(image.load(player_image), (size_x, size_y))
         self.speed = player_speed
-
+ 
         self.rect = self.image.get_rect()
         self.rect.x = player_x
         self.rect.y = player_y
@@ -41,9 +41,13 @@ class Player(GameSprite):
         if keys[K_DOWN] and self.rect.y < win_width - 80:
             self.rect.y += self.speed
 
+
+ 
 racket1 = Player('racket.png', 30, 200, 50, 150, 4)
 racket2 = Player('racket.png', 520, 200, 50, 150, 4)
 ball = GameSprite('tenis_ball.png', 200, 200, 50, 50, 4)
+
+
 
 dx = 3
 dy = 3
@@ -62,7 +66,10 @@ while game:
         racket2.update_r()
         ball.rect.x += dx
         ball.rect.y += dy
-       
+        if ball.rect.y<0 or ball.rect.y>=win_height - 50:
+            dy *= -1
+
+
         window.fill((100,100,100))
         racket1.reset()
         racket2.reset()
